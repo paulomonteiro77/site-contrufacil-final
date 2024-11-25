@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConstruFácil</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>ConstruFácil</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html">Área do Cliente</a></li>
+                <li><a href="php/carrinho.php">Carrinho</a></li>
+                <li><a href="admin/painel.html">Administração</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <h2>Bem-vindo à Melhor Loja de Materiais de Construção</h2>
+            <p>Encontre todos os materiais necessários para sua construção.</p>
+        </section>
+        <section class="produtos">
+            <div class="produto">
+                <img src="img/imagem-cimento.jpg" alt="Cimento">
+                <h3>Cimento</h3>
+                <p>Preço: R$ 30,00</p>
+                <form action="php/adicionar_carrinho.php" method="post" class="form-carrinho">
+                    <input type="hidden" name="id" value="1">
+                    <input type="hidden" name="nome" value="Cimento">
+                    <input type="hidden" name="preco" value="30">
+                    <button type="submit">Adicionar ao Carrinho</button>
+                </form>
+            </div>
+            <div class="produto">
+                <img src="img/imagem-areia.jpg" alt="Areia">
+                <h3>Areia</h3>
+                <p>Preço: R$ 50,00</p>
+                <form action="php/adicionar_carrinho.php" method="post" class="form-carrinho">
+                    <input type="hidden" name="id" value="2">
+                    <input type="hidden" name="nome" value="Areia">
+                    <input type="hidden" name="preco" value="50">
+                    <button type="submit">Adicionar ao Carrinho</button>
+                </form>
+            </div>
+            <div class="produto">
+                <img src="img/imagem-brita.jpg" alt="Brita">
+                <h3>Brita</h3>
+                <p>Preço: R$ 70,00</p>
+                <form action="php/adicionar_carrinho.php" method="post" class="form-carrinho">
+                    <input type="hidden" name="id" value="3">
+                    <input type="hidden" name="nome" value="Brita">
+                    <input type="hidden" name="preco" value="70">
+                    <button type="submit">Adicionar ao Carrinho</button>
+                </form>
+            </div>
+            <div class="produto">
+                <img src="img/imagem-tijolo.jpg" alt="Tijolo">
+                <h3>Tijolo</h3>
+                <p>Preço: R$ 40,00</p>
+                <form action="php/adicionar_carrinho.php" method="post" class="form-carrinho">
+                    <input type="hidden" name="id" value="4">
+                    <input type="hidden" name="nome" value="Tijolo">
+                    <input type="hidden" name="preco" value="40">
+                    <button type="submit">Adicionar ao Carrinho</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <div class="notificacao" id="notificacao">Item adicionado ao carrinho!</div>
+    <footer>
+        <p>&copy; ConstruFácil. Todos os direitos reservados.</p>
+    </footer>
+    <script>
+        document.querySelectorAll('.form-carrinho').forEach(form => {
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+
+                // Enviar o formulário via Ajax
+                const formData = new FormData(form);
+                fetch('php/adicionar_carrinho.php', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => response.text()).then(data => {
+                    // Exibir a notificação
+                    const notificacao = document.getElementById('notificacao');
+                    notificacao.style.display = 'block';
+                    setTimeout(() => {
+                        notificacao.style.display = 'none';
+                    }, 3000);
+                }).catch(error => {
+                    console.error('Erro:', error);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

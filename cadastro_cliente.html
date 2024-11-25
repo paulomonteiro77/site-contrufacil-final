@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Clientes - ConstruFácil</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>ConstruFácil: Cadastro de Clientes</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html">Área do Cliente</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="cadastro">
+            <h2>Cadastro de Clientes</h2>
+            <form action="php/cadastro_cliente.php" method="post">
+                <table class="cadastro-table">
+                    <tr>
+                        <td><label for="nome">Nome:</label></td>
+                        <td><input type="text" id="nome" name="nome" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Email:</label></td>
+                        <td><input type="email" id="email" name="email" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="senha">Senha:</label></td>
+                        <td><input type="password" id="senha" name="senha" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="endereco">Endereço:</label></td>
+                        <td><input type="text" id="endereco" name="endereco" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="cep">CEP:</label></td>
+                        <td><input type="text" id="cep" name="cep" onblur="buscarCEP('cep')" required></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><button type="submit">Cadastrar</button></td>
+                    </tr>
+                </table>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; ConstruFácil. Todos os direitos reservados.</p>
+    </footer>
+    <script src="busca_cep.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Produtos - Admin</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('../php/listar_produtos.php')
+                .then(response => response.json())
+                .then(data => {
+                    const tabelaBody = document.getElementById('tabelaProdutos');
+                    if (data && data.length > 0) {
+                        data.forEach(produto => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td><img src='../imagens/${produto.imagem}' alt='${produto.nome}' width='50'></td>
+                                <td>${produto.nome}</td>
+                                <td>${produto.descricao}</td>
+                                <td>R$ ${parseFloat(produto.preco).toFixed(2).replace('.', ',')}</td>
+                                <td>${produto.estoque}</td>
+                            `;
+                            tabelaBody.appendChild(row);
+                        });
+                    } else {
+                        const row = document.createElement('tr');
+                        row.innerHTML = "<td colspan='5'>Nenhum produto cadastrado.</td>";
+                        tabelaBody.appendChild(row);
+                    }
+                })
+                .catch(error => console.error('Erro ao buscar produtos:', error));
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Admin: Lista de Produtos</h1>
+        <nav>
+            <ul>
+                <li><a href="painel.html">Painel</a></li>
+                <li><a href="cadastro_produto.html">Cadastrar Produto</a></li>
+                <li><a href="listar_produtos.html">Listar Produtos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="produtos">
+            <h2>Produtos Cadastrados</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Imagem</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Preço</th>
+                        <th>Estoque</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaProdutos">
+                    <!-- Produtos serão adicionados aqui dinamicamente -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; ConstruFácil. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
